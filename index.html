@@ -5,10 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Trafik Durumu</title>
-     <script src="https://api-maps.yandex.ru/2.1/?apikey=c98a99d8-4471-445d-9ba7-5ca299d8852d&lang=tr_TR" type="text/javascript">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=c98a99d8-4471-445d-9ba7-5ca299d8852d&lang=tr_TR" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQueryFormStyler/2.0.2/jquery.formstyler.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQueryFormStyler/2.0.2/jquery.formstyler.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQueryFormStyler/2.0.2/jquery.formstyler.theme.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <style>
+      body {
+        font-size: 14px;
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+      }
+      .form-inner {
+        display: flex;
+        display: -ms-flexbox;
+        align-items: center;
+      }
+
+      .cities {
+        margin-top: 10px;
+      }
+      .form-group {
+        position: relative;
+        width: 70%;
+      }
+
+      .form-label {
+        font-size: 14px;
+        width: 100%;
+      }
+
+      .form-block {
+        display: block;
+        width: 100%;
+      }
+
+      .is-bold {
+        font-weight: 700;
+      }
+
+      .traffic-page-content-map {
+        margin-top: 40px;
+        display: flex;
+        display: -ms-flexbox;
+        align-items: center;
+      }
+
+      .jq-selectbox__select {
+        -webkit-border-radius: 0 !important;
+        border-radius: 0 !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border-color: #ccc !important;
+        background: #fff !important;
+        height: 50px !important;
+        line-height: 50px !important;
+      }
+      .jq-selectbox__trigger {
+        border-left: 0 !important;
+      }
+      .jq-selectbox__trigger-arrow {
+        top: 22px !important;
+        border-top-color: #022032 !important;
+      }
+    </style> 
 </head>
 <body>
+    <div class="form">
+        <div class="form-inner">
+            <div class="form-group">
+                <label for="" class="form-label form-block is-bold">İL SEÇ</label>
     <select id="cities" class="cities form-block form-is-margin js-form-styler" id="cities">
                 <option value="28.987013,41.002703" >İSTANBUL</option>
                 <option value="32.853034,39.923429" >ANKARA</option>
@@ -21,6 +87,9 @@
                 <option value="32.479499,37.864012" >KONYA</option>
                 <option value="29.890639,40.855371" >KOCAELİ</option>
     </select>
+    </div>
+    </div>
+    </div>
  <div class="traffic-page-content-map">
      <div id="map" style="width: 1000px; height: 600px"></div>
  </div>
@@ -51,6 +120,22 @@
             myMap.controls.add(trafficControl);
             trafficControl.showTraffic();
         });
+
+        /**
+        * function formStylerInit
+        * refresh set edilmezse form styler init yapılır.
+        * refresh true olarak set edilirse form styler reinit yapılır.
+        */
+        function formStylerInit(refresh) {
+            var elemFormStyle = $("select.js-form-styler");
+            if (elemFormStyle.length > 0 && !refresh) {
+                elemFormStyle.styler();
+            } else {
+                elemFormStyle.trigger('refresh');
+            }
+        }
+
+        formStylerInit();
         
     </script>
 </body>
